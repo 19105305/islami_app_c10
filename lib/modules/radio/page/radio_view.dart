@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/config/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class RadioView extends StatelessWidget {
   const RadioView({super.key});
@@ -7,6 +9,7 @@ class RadioView extends StatelessWidget {
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
+    var vm = Provider.of<SettingsProvider>(context);
     return Container(
       height: mediaQuery.height,
       width: mediaQuery.width,
@@ -21,10 +24,10 @@ class RadioView extends StatelessWidget {
             "اذاعة القران الكريم",
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontFamily: "El Messiri",
-              fontSize: 30,
-              fontWeight: FontWeight.w600,
-            ),
+                fontFamily: "El Messiri",
+                fontSize: 30,
+                fontWeight: FontWeight.w600,
+                color: vm.isDark() ? Colors.white : Colors.black),
           ),
           SizedBox(
             height: 30,
@@ -36,17 +39,18 @@ class RadioView extends StatelessWidget {
                   onPressed: () {},
                   icon: Icon(Icons.skip_previous),
                   iconSize: 50,
-                  color: theme.primaryColor),
+                  color: vm.isDark() ? Color(0xFFFACC1D) : theme.primaryColor),
               IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.play_arrow),
-                  iconSize: 50,
-                  color: theme.primaryColor),
+                onPressed: () {},
+                icon: Icon(Icons.play_arrow),
+                iconSize: 50,
+                color: vm.isDark() ? Color(0xFFFACC1D) : theme.primaryColor,
+              ),
               IconButton(
                   onPressed: () {},
                   icon: Icon(Icons.skip_next),
                   iconSize: 50,
-                  color: theme.primaryColor),
+                  color: vm.isDark() ? Color(0xFFFACC1D) : theme.primaryColor),
             ],
           ),
         ],

@@ -23,7 +23,7 @@ class _HadethViewState extends State<HadethView> {
           "assets/images/hadeth_header.png",
           height: mediaQuery.height * 0.2,
         ),
-        Divider(color: theme.primaryColor, thickness: 1.2),
+        Divider(thickness: 1.2),
         Text(
           "الاحاديث",
           style: TextStyle(
@@ -32,7 +32,7 @@ class _HadethViewState extends State<HadethView> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        Divider(color: theme.primaryColor, thickness: 1.2),
+        Divider(thickness: 1.2),
         Expanded(
           child: ListView.builder(
             itemBuilder: (context, index) => InkWell(

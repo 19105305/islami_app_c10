@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:islami_app/config/settings_provider.dart';
 import 'package:islami_app/modules/quran/page/quran_view.dart';
+import 'package:provider/provider.dart';
 
 class QuranDetailsView extends StatefulWidget {
   static const String routename = "qurandetails";
@@ -17,12 +19,15 @@ class _QuranDetailsViewState extends State<QuranDetailsView> {
     var args = ModalRoute.of(context)?.settings.arguments as SuraDetails;
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
+    var vm = Provider.of<SettingsProvider>(context);
 
     loadData(args.suraNumber);
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/main_background.png"),
+          image: AssetImage(
+            vm.getBackground(),
+          ),
           fit: BoxFit.fill,
         ),
       ),
@@ -36,7 +41,9 @@ class _QuranDetailsViewState extends State<QuranDetailsView> {
           margin: EdgeInsets.only(bottom: 80, right: 20, left: 20, top: 15),
           padding: EdgeInsets.only(bottom: 80, right: 20, left: 20, top: 15),
           decoration: BoxDecoration(
-            color: Color(0xFFF8F8F8).withOpacity(0.8),
+            color: vm.isDark()
+                ? Color(0xFF141A2E).withOpacity(0.8)
+                : Color(0xFFF8F8F8).withOpacity(0.8),
             borderRadius: BorderRadius.circular(25),
           ),
           child: Column(
@@ -46,10 +53,8 @@ class _QuranDetailsViewState extends State<QuranDetailsView> {
                 children: [
                   Text(
                     "سورة ${args.suraName}",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontFamily: "El Messiri",
-                      fontWeight: FontWeight.normal,
+                    style: theme.textTheme.bodyMedium!.copyWith(
+                      color: vm.isDark() ? Color(0xFFFACC1D) : Colors.black,
                     ),
                   ),
                   SizedBox(
@@ -58,12 +63,13 @@ class _QuranDetailsViewState extends State<QuranDetailsView> {
                   Icon(
                     Icons.play_circle_fill_rounded,
                     size: 28,
+                    color: vm.isDark() ? Color(0xFFFACC1D) : Colors.black,
                   )
                 ],
               ),
               Divider(
-                color: theme.primaryColor,
-              ),
+                // color: theme.primaryColor,
+                  ),
               if (versesList.isEmpty)
                 Center(
                   child: CircularProgressIndicator(
@@ -76,10 +82,9 @@ class _QuranDetailsViewState extends State<QuranDetailsView> {
                     itemBuilder: (context, index) => Text(
                       "{${index + 1}} ${versesList[index]}",
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          fontFamily: "El Messiri",
-                          fontSize: 25,
-                          fontWeight: FontWeight.w500),
+                      style: theme.textTheme.bodySmall!.copyWith(
+                        color: vm.isDark() ? Color(0xFFFACC1D) : Colors.black,
+                      ),
                     ),
                     itemCount: versesList.length,
                   ),

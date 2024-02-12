@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/config/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class TasbehView extends StatefulWidget {
   const TasbehView({super.key});
@@ -27,6 +29,7 @@ class _TasbehViewState extends State<TasbehView> {
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
+    var vm = Provider.of<SettingsProvider>(context);
     return Container(
       height: mediaQuery.height,
       width: mediaQuery.width,
@@ -38,16 +41,23 @@ class _TasbehViewState extends State<TasbehView> {
               Stack(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(left: 110, top: 35),
+                    margin: EdgeInsets.only(left: 105, top: 35),
                     child: Image.asset(
                       'assets/images/seb7aHead.png',
+                      color:
+                          vm.isDark() ? Color(0xFFFACC1D) : theme.primaryColor,
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 110),
                     child: Transform.rotate(
                         angle: rotationAngle * (3.1415927 / 180),
-                        child: Image.asset('assets/images/seb7aBody.png')),
+                        child: Image.asset(
+                          'assets/images/seb7aBody.png',
+                          color: vm.isDark()
+                              ? Color(0xFFFACC1D)
+                              : theme.primaryColor,
+                        )),
                   ),
                 ],
               ),
@@ -79,7 +89,7 @@ class _TasbehViewState extends State<TasbehView> {
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Color(0xFFC8B496),
+                  color: vm.isDark() ? Color(0xFF141A2E) : Color(0xFFC8B496),
                 ),
                 child: Text(
                   "$counter",
@@ -88,6 +98,7 @@ class _TasbehViewState extends State<TasbehView> {
                     fontFamily: "Inter",
                     fontWeight: FontWeight.w400,
                     fontSize: 23,
+                    color: vm.isDark() ? Colors.white : Colors.black,
                   ),
                 ),
               ),
@@ -108,7 +119,7 @@ class _TasbehViewState extends State<TasbehView> {
                   height: 40,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: theme.primaryColor,
+                    color: vm.isDark() ? Color(0xFFFACC1D) : theme.primaryColor,
                   ),
                   child: Text(
                     texts[textIndex],
@@ -117,6 +128,7 @@ class _TasbehViewState extends State<TasbehView> {
                       fontFamily: "Inter",
                       fontWeight: FontWeight.w400,
                       fontSize: 25,
+                      color: vm.isDark() ? Colors.black : Colors.white,
                     ),
                   ),
                 ),

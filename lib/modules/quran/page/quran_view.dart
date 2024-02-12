@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:islami_app/layout/layout_view.dart';
 import 'package:islami_app/modules/quran/page/quran_detail.dart';
 import 'package:islami_app/modules/quran/widgets/sura_title_widget.dart';
 
@@ -135,7 +134,7 @@ class QuranView extends StatelessWidget {
         ),
         Divider(
           thickness: 1,
-          color: theme.primaryColor,
+         // color: theme.primaryColor,
         ),
         Row(
           children: [
@@ -153,7 +152,8 @@ class QuranView extends StatelessWidget {
             Container(
               height: 35,
               width: 1,
-              color: theme.primaryColor,
+              child: VerticalDivider(),
+              // color: theme.primaryColor,
             ),
             Expanded(
               child: Text(
@@ -170,7 +170,7 @@ class QuranView extends StatelessWidget {
         ),
         Divider(
           thickness: 1,
-          color: theme.primaryColor,
+          //color: theme.primaryColor,
         ),
         Expanded(
           child: ListView.builder(
